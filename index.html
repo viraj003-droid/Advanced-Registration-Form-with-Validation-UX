@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <form class="form-box" id="form">
+
+    <h1>Register Now</h1>
+
+    <!-- Name -->
+    <div class="input-box">
+      <label>Full Name</label>
+      <input type="text" id="name" placeholder="Enter your full name" required>
+      <small></small>
+    </div>
+
+    <!-- Email -->
+    <div class="input-box">
+      <label>Email</label>
+      <input type="email" id="email" placeholder="Enter your email" required>
+      <small></small>
+    </div>
+
+    <!-- Password -->
+    <div class="input-box">
+      <label>Password</label>
+      <input type="password" id="password" placeholder="Enter password" required>
+      <small></small>
+    </div>
+
+    <!-- Gender -->
+    <div class="input-group">
+      <p>Gender</p>
+      <div class="radio-group">
+        <label><input type="radio" name="gender" required> Male</label>
+        <label><input type="radio" name="gender"> Female</label>
+        <label><input type="radio" name="gender"> Other</label>
+      </div>
+    </div>
+
+    <!-- Course -->
+    <div class="input-box">
+      <label>Course / Interest</label>
+      <select id="course" required>
+        <option value="">Select your interest</option>
+        <option>Web Development</option>
+        <option>AI / Machine Learning</option>
+        <option>Data Science</option>
+        <option>UI / UX Design</option>
+      </select>
+      <small></small>
+    </div>
+
+   <div class="button-group">
+  <button type="submit" class="submit-btn">Register Now</button>
+  <button type="reset" class="reset-btn">Reset</button>
+</div>
+
+  </form>
+</div>
+
+<script>
+const form = document.getElementById("form");
+
+form.addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  let valid = true;
+
+  const name = document.getElementById("name");
+  const email = document.getElementById("email");
+  const password = document.getElementById("password");
+  const course = document.getElementById("course");
+
+  if (name.value.trim() === "") {
+    setError(name, "Enter your full name");
+    valid = false;
+  } else {
+    setSuccess(name);
+  }
+
+  if (!email.value.includes("@")) {
+    setError(email, "Enter valid email");
+    valid = false;
+  } else {
+    setSuccess(email);
+  }
+
+  if (password.value.length < 6) {
+    setError(password, "Minimum 6 characters");
+    valid = false;
+  } else {
+    setSuccess(password);
+  }
+
+  if (course.value === "") {
+    setError(course, "Select a course");
+    valid = false;
+  } else {
+    setSuccess(course);
+  }
+
+  if (valid) {
+    alert("Form submitted successfully!");
+    form.reset();
+  }
+});
+
+function setError(input, message) {
+  const box = input.parentElement;
+  const small = box.querySelector("small");
+  small.innerText = message;
+  small.style.color = "red";
+}
+
+function setSuccess(input) {
+  const box = input.parentElement;
+  const small = box.querySelector("small");
+  small.innerText = "";
+}
+</script>
+
+</body>
+</html>
